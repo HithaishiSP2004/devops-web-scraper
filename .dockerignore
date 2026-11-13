@@ -1,0 +1,23 @@
+# Node.js dependencies and logs
+node_modules
+npm-debug.log*
+
+# Python cache and virtual environments
+__pycache__
+*.py[cod]
+*$py.class
+.venv
+venv
+env
+
+# Version control
+.git
+.gitignore
+
+# Local generated artifacts (forces builder stage to generate fresh data)
+scraped_data.json
+scraped_data.json.bak
+
+# Assignment planning documents
+phase0.md
+plan-update.md

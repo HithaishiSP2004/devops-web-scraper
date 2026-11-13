@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+package-lock.json.bak
+
+# Python environment and cache
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# Environment and sensitive files
+.env
+.env.*
+
+# Local scraping data & backups
+scraped_data.json
+scraped_data.json.bak
+
+# Logs
+*.log
+npm-debug.log*
+
+# Assignment planning documents (ignored per user request)
+phase0.md
+plan-update.md
+
+# Operating System files
+.DS_Store
+Thumbs.db

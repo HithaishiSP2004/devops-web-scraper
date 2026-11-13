@@ -1,0 +1,16 @@
+{
+  "name": "devops-web-scraper",
+  "version": "1.0.0",
+  "description": "Dockerized Web Scraper using Node.js, Puppeteer, Chromium and Python Flask",
+  "main": "scraper.js",
+  "scripts": {
+    "start": "node scraper.js",
+    "scrape": "node scraper.js"
+  },
+  "dependencies": {
+    "puppeteer": "22.15.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
