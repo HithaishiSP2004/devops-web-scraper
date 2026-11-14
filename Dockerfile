@@ -20,14 +20,14 @@ COPY package.json package-lock.json ./
 RUN npm ci --omit=dev
 
 # Copy scraper source code
-COPY scraper.js ./
+COPY scrape.js ./
 
 # Mandatory build argument for the URL to scrape (no default provided)
 ARG SCRAPE_URL
 ENV SCRAPE_URL=${SCRAPE_URL}
 
 # Execute scraper during build to generate /app/scraped_data.json
-RUN node scraper.js
+RUN node scrape.js
 
 # ==============================================================================
 # Stage 2: Runtime (Python + Flask)

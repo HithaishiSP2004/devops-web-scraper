@@ -7,7 +7,7 @@ const targetUrl = process.env.SCRAPE_URL;
 
 if (!targetUrl || targetUrl.trim() === '') {
   console.error('Error: SCRAPE_URL environment variable is required and cannot be empty.');
-  console.error('Usage: SCRAPE_URL="https://example.com" node scraper.js');
+  console.error('Usage: SCRAPE_URL="https://example.com" node scrape.js');
   process.exit(1);
 }
 
