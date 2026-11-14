@@ -10,11 +10,11 @@ DATA_FILE = Path(__file__).resolve().parent / "scraped_data.json"
 
 @app.route("/", methods=["GET"])
 def get_scraped_data():
-    # 1. Handle missing file error (404)
+    # Return 404 if data file is missing
     if not DATA_FILE.is_file():
         return jsonify({"error": "Scraped data file not found"}), 404
 
-    # 2. Read and parse the JSON file (500 if corrupted or unreadable)
+    # Read and return JSON data
     try:
         with open(DATA_FILE, "r", encoding="utf-8") as file:
             data = json.load(file)

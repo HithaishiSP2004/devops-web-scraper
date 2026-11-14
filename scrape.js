@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const puppeteer = require('puppeteer');
 
-// 1. Read and validate target URL from SCRAPE_URL environment variable
+// Read and validate target URL from environment variable
 const targetUrl = process.env.SCRAPE_URL;
 
 if (!targetUrl || targetUrl.trim() === '') {
@@ -19,7 +19,7 @@ try {
   process.exit(1);
 }
 
-// 2. Enforce allowed protocols (http and https only)
+// Only allow HTTP and HTTPS protocols
 if (parsedUrl.protocol !== 'http:' && parsedUrl.protocol !== 'https:') {
   console.error(`Error: Unsupported protocol "${parsedUrl.protocol}". Only "http:" and "https:" are allowed.`);
   process.exit(1);
@@ -28,7 +28,7 @@ if (parsedUrl.protocol !== 'http:' && parsedUrl.protocol !== 'https:') {
 async function scrape() {
   console.log(`Starting scrape for URL: ${parsedUrl.href}`);
 
-  // 3. Configure Puppeteer launch options with container-friendly flags
+  // Container-friendly flags for headless Chromium
   const launchOptions = {
     headless: 'new',
     args: [
@@ -51,14 +51,14 @@ async function scrape() {
     browser = await puppeteer.launch(launchOptions);
     const page = await browser.newPage();
 
-    // 4. Navigate to the webpage with a 30s timeout, waiting for DOM content
+    // Navigate to page and wait for DOM content
     console.log('Navigating to page...');
     await page.goto(parsedUrl.href, {
       waitUntil: 'domcontentloaded',
       timeout: 30000,
     });
 
-    // 5. Extract required fields from the page DOM
+    // Extract page title, heading, and meta description
     console.log('Extracting page data...');
     const extractedData = await page.evaluate(() => {
       const h1Element = document.querySelector('h1');
@@ -73,7 +73,7 @@ async function scrape() {
       };
     });
 
-    // 6. Build the final consistent JSON structure
+    // Build structured output
     const result = {
       url: parsedUrl.href,
       title: extractedData.title,
@@ -82,7 +82,7 @@ async function scrape() {
       scrapedAt: new Date().toISOString(),
     };
 
-    // 7. Save scraped data to scraped_data.json
+    // Save output to scraped_data.json
     const outputPath = path.join(__dirname, 'scraped_data.json');
     fs.writeFileSync(outputPath, JSON.stringify(result, null, 2), 'utf-8');
     console.log(`Scraping successful. Data saved to: ${outputPath}`);
@@ -91,7 +91,7 @@ async function scrape() {
     console.error(`Error during scraping: ${error.message}`);
     process.exitCode = 1;
   } finally {
-    // 8. Always close the browser to free system resources
+    // Always close browser to clean up processes
     if (browser) {
       console.log('Closing browser...');
       await browser.close();

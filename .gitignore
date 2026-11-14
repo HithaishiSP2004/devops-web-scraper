@@ -22,7 +22,7 @@ scraped_data.json.bak
 *.log
 npm-debug.log*
 
-# Assignment planning documents (ignored per user request)
+# Local planning notes
 phase0.md
 plan-update.md
 

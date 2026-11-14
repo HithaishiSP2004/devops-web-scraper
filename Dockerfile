@@ -1,7 +1,4 @@
-# ==============================================================================
-# Stage 1: Builder (Node.js + Puppeteer + Chromium)
-# Scrapes the target URL during image build time
-# ==============================================================================
+# Stage 1: Build and scrape
 FROM node:18-slim AS builder
 
 WORKDIR /app
@@ -29,10 +26,7 @@ ENV SCRAPE_URL=${SCRAPE_URL}
 # Execute scraper during build to generate /app/scraped_data.json
 RUN node scrape.js
 
-# ==============================================================================
-# Stage 2: Runtime (Python + Flask)
-# Minimal production image containing only Python, Flask, server code, and JSON
-# ==============================================================================
+# Stage 2: Serve scraped data
 FROM python:3.10-slim AS runner
 
 WORKDIR /app

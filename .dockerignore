@@ -18,6 +18,6 @@ env
 scraped_data.json
 scraped_data.json.bak
 
-# Assignment planning documents
+# Local planning notes
 phase0.md
 plan-update.md
